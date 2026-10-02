@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Diamond Rush BD</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#100b24;color:#fff}
+header{padding:20px;text-align:center;background:linear-gradient(135deg,#6d28d9,#9333ea)}
+.logo{font-size:28px;font-weight:800}.sub{opacity:.9}
+.wrap{max-width:520px;margin:auto;padding:16px}
+.card{background:#1b1433;border:1px solid #3b2b63;border-radius:16px;padding:16px;margin:14px 0;box-shadow:0 8px 24px #0004}
+h2{margin-top:0}.packs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pack{background:#251b43;border:1px solid #4b3678;border-radius:12px;padding:14px;text-align:center}
+.price{font-size:20px;font-weight:700;color:#c4b5fd;margin:6px 0}
+input,select,button{width:100%;padding:13px;border-radius:10px;border:0;margin-top:9px;font-size:15px}
+input,select{background:#fff;color:#111}button{background:#7c3aed;color:#fff;font-weight:700;cursor:pointer}
+.contact{display:flex;gap:10px}.contact a{flex:1;text-decoration:none;color:#fff;text-align:center;padding:12px;border-radius:10px;background:#27203f}
+.note{font-size:12px;color:#cfc7df;line-height:1.5}
+</style>
+</head>
+<body>
+<header><div class="logo">💎 Diamond Rush BD</div><div class="sub">Free Fire Top-Up Demo</div></header>
+<div class="wrap">
+<div class="card"><h2>🔥 Top-Up</h2><label>Player UID</label><input id="uid" placeholder="আপনার Free Fire UID">
+<label>পেমেন্ট</label><select id="pay"><option>Nagad</option><option>bKash</option><option>Rocket</option></select></div>
+
+<div class="card"><h2>💎 Diamond Packages</h2>
+<div class="packs">
+<div class="pack">25 Diamonds<div class="price">৳25</div><button onclick="order(25)">Order</button></div>
+<div class="pack">50 Diamonds<div class="price">৳45</div><button onclick="order(45)">Order</button></div>
+<div class="pack">115 Diamonds<div class="price">৳90</div><button onclick="order(90)">Order</button></div>
+<div class="pack">240 Diamonds<div class="price">৳180</div><button onclick="order(180)">Order</button></div>
+</div></div>
+
+<div class="card"><h2>📞 Support</h2>
+<div class="contact">
+<a href="https://wa.me/8801829095129">WhatsApp</a>
+<a href="https://t.me/rifat00r99">Telegram</a>
+</div>
+<p class="note">Nagad payment: 01877786033</p></div>
+
+<div class="card"><h2>⚠️ Demo Notice</h2>
+<p class="note">এটি একটি ডেমো ওয়েবসাইট। বাস্তব টাকা নেওয়া, অটো পেমেন্ট এবং আসল Free Fire ডায়মন্ড পাঠানোর জন্য অনুমোদিত payment gateway ও বৈধ top-up supplier/API প্রয়োজন।</p></div>
+</div>
+<script>
+function order(price){
+ const uid=document.getElementById('uid').value.trim();
+ const pay=document.getElementById('pay').value;
+ if(!uid){alert('আগে Player UID দিন।');return;}
+ alert('Order demo: '+price+' টাকা | UID: '+uid+' | Payment: '+pay);
+}
+</script>
+</body></html>
