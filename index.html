@@ -1,54 +1,199 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Diamond Rush BD</title>
-<style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#100b24;color:#fff}
-header{padding:20px;text-align:center;background:linear-gradient(135deg,#6d28d9,#9333ea)}
-.logo{font-size:28px;font-weight:800}.sub{opacity:.9}
-.wrap{max-width:520px;margin:auto;padding:16px}
-.card{background:#1b1433;border:1px solid #3b2b63;border-radius:16px;padding:16px;margin:14px 0;box-shadow:0 8px 24px #0004}
-h2{margin-top:0}.packs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.pack{background:#251b43;border:1px solid #4b3678;border-radius:12px;padding:14px;text-align:center}
-.price{font-size:20px;font-weight:700;color:#c4b5fd;margin:6px 0}
-input,select,button{width:100%;padding:13px;border-radius:10px;border:0;margin-top:9px;font-size:15px}
-input,select{background:#fff;color:#111}button{background:#7c3aed;color:#fff;font-weight:700;cursor:pointer}
-.contact{display:flex;gap:10px}.contact a{flex:1;text-decoration:none;color:#fff;text-align:center;padding:12px;border-radius:10px;background:#27203f}
-.note{font-size:12px;color:#cfc7df;line-height:1.5}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diamond Rush BD</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #0d0b16; color: #fff; padding-bottom: 70px; }
+        .header { background: linear-gradient(135deg, #6d28d9, #4c1d95); padding: 20px; text-align: center; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .header h1 { font-size: 24px; font-weight: 800; }
+        .header p { font-size: 14px; color: #c084fc; margin-top: 5px; }
+        .container { max-width: 500px; margin: auto; padding: 15px; }
+        .section-box { background-color: #161224; border-radius: 16px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 1px solid #231b3b; margin-bottom: 20px; }
+        .section-title { font-size: 18px; font-weight: 700; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; color: #fff; }
+        .input-label { font-size: 13px; color: #a78bfa; margin-bottom: 8px; display: block; font-weight: 600; }
+        .input-box, .select-box { width: 100%; padding: 14px; border: 1px solid #312e81; border-radius: 12px; font-size: 16px; outline: none; background-color: #1e1635; color: #fff; }
+        .input-box:focus, .select-box:focus { border-color: #8b5cf6; }
+        .packages-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .package-card { background: linear-gradient(135deg, #311065, #21074e); border-radius: 16px; padding: 15px; text-align: center; border: 1px solid #3b0764; transition: all 0.2s; cursor: pointer; position: relative; }
+        .package-card:hover { transform: translateY(-3px); }
+        .package-card.selected { border-color: #38bdf8; background: linear-gradient(135deg, #4c1d95, #311065); box-shadow: 0 0 10px rgba(56, 189, 248, 0.4); }
+        .package-title { font-size: 14px; font-weight: 700; color: #fff; }
+        .package-price { color: #38bdf8; font-size: 18px; font-weight: bold; margin: 10px 0; }
+        .order-btn { width: 100%; background: linear-gradient(90deg, #6d28d9, #4f46e5); color: #fff; border: none; padding: 12px; border-radius: 10px; font-size: 15px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+        .order-btn:hover { background: linear-gradient(90deg, #7c3aed, #6366f1); }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .service-card { background-color: #161224; border-radius: 16px; padding: 15px; text-align: center; border: 1px solid #231b3b; transition: transform 0.2s; }
+        .service-card:hover { transform: translateY(-3px); }
+        .service-title { font-size: 12px; font-weight: 600; color: #fff; }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #161224; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #231b3b; z-index: 100; }
+        .nav-item { text-align: center; text-decoration: none; color: #8b5cf6; font-size: 11px; }
+        .nav-item.active { color: #fff; font-weight: bold; }
+        .nav-icon { font-size: 20px; display: block; margin-bottom: 2px; }
+        .nav-center { width: 44px; height: 44px; background: #6d28d9; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: -20px; font-size: 24px; box-shadow: 0 4px 10px rgba(109,40,217,0.3); }
+        .notice-box { background-color: #1e1635; border-left: 4px solid #eab308; border-radius: 12px; padding: 15px; color: #d1d5db; font-size: 13px; line-height: 1.5; }
+        
+        /* Modal Popup Styles */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; padding: 15px; }
+        .modal-content { background-color: #161224; border: 1px solid #312e81; border-radius: 20px; max-width: 400px; width: 100%; padding: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); text-align: center; }
+        .modal-title { font-size: 20px; font-weight: 700; margin-bottom: 15px; color: #38bdf8; }
+        .payment-instructions { background-color: #1e1635; border-radius: 12px; padding: 15px; margin-bottom: 20px; font-size: 14px; text-align: left; line-height: 1.6; border-left: 4px solid #8b5cf6; }
+        .modal-btn { width: 100%; padding: 12px; border-radius: 10px; border: none; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .submit-btn { background: #22c55e; color: #fff; }
+        .close-btn { background: #ef4444; color: #fff; }
+    </style>
 </head>
 <body>
-<header><div class="logo">💎 Diamond Rush BD</div><div class="sub">Free Fire Top-Up Demo</div></header>
-<div class="wrap">
-<div class="card"><h2>🔥 Top-Up</h2><label>Player UID</label><input id="uid" placeholder="আপনার Free Fire UID">
-<label>পেমেন্ট</label><select id="pay"><option>Nagad</option><option>bKash</option><option>Rocket</option></select></div>
+    <div class="header">
+        <h1>Diamond Rush BD</h1>
+        <p>Free Fire Top-Up Demo</p>
+    </div>
+    <div class="container">
+        <div class="section-box">
+            <div class="section-title">🔥 Top-Up</div>
+            <label class="input-label">Player UID</label>
+            <input type="number" id="player-uid" class="input-box" placeholder="আপনার Free Fire UID লিখুন">
+            
+            <label class="input-label" style="margin-top: 15px;">পেমেন্ট মেথড</label>
+            <select id="payment-method" class="select-box">
+                <option value="Nagad">Nagad</option>
+                <option value="bKash">bKash</option>
+                <option value="Rocket">Rocket</option>
+            </select>
+        </div>
+        
+        <div class="section-title">💎 Diamond Packages</div>
+        <div class="packages-grid">
+            <div class="package-card" onclick="selectPackage(this, '25 Diamonds', 25)">
+                <div class="package-title">25 Diamonds</div>
+                <div class="package-price">৳২৫</div>
+                <button class="order-btn">Select</button>
+            </div>
+            <div class="package-card" onclick="selectPackage(this, '50 Diamonds', 45)">
+                <div class="package-title">50 Diamonds</div>
+                <div class="package-price">৳৪৫</div>
+                <button class="order-btn">Select</button>
+            </div>
+        </div>
 
-<div class="card"><h2>💎 Diamond Packages</h2>
-<div class="packs">
-<div class="pack">25 Diamonds<div class="price">৳25</div><button onclick="order(25)">Order</button></div>
-<div class="pack">50 Diamonds<div class="price">৳45</div><button onclick="order(45)">Order</button></div>
-<div class="pack">115 Diamonds<div class="price">৳90</div><button onclick="order(90)">Order</button></div>
-<div class="pack">240 Diamonds<div class="price">৳180</div><button onclick="order(180)">Order</button></div>
-</div></div>
+        <div style="margin-bottom: 20px;">
+            <button class="order-btn" style="padding: 15px; font-size: 16px;" onclick="processOrder()">টপ-আপ অর্ডার করুন</button>
+        </div>
 
-<div class="card"><h2>📞 Support</h2>
-<div class="contact">
-<a href="https://wa.me/8801829095129">WhatsApp</a>
-<a href="https://t.me/rifat00r99">Telegram</a>
-</div>
-<p class="note">Nagad payment: 01877786033</p></div>
+        <div class="section-title">🎮 Others Game</div>
+        <div class="services-grid" style="margin-bottom: 20px;">
+            <div class="service-card"><div class="service-title">PUBG TopUp</div></div>
+            <div class="service-card"><div class="service-title">Clash Of Clans</div></div>
+            <div class="service-card"><div class="service-title">Ludo King</div></div>
+        </div>
+        
+        <div class="section-title">🛒 Buy - Sell</div>
+        <div class="services-grid" style="margin-bottom: 20px;">
+            <div class="service-card"><div class="service-title">Apple Gift Card</div></div>
+            <div class="service-card"><div class="service-title">Gmail - Sell</div></div>
+        </div>
+        
+        <div class="section-title">🔒 Premium VPN</div>
+        <div class="services-grid" style="margin-bottom: 20px;">
+            <div class="service-card"><div class="service-title">Nord VPN</div></div>
+            <div class="service-card"><div class="service-title">Express VPN</div></div>
+        </div>
+        
+        <div class="section-title">⚙️ App Service</div>
+        <div class="services-grid" style="margin-bottom: 20px;">
+            <div class="service-card"><div class="service-title">YouTube</div></div>
+            <div class="service-card"><div class="service-title">Telegram</div></div>
+            <div class="service-card"><div class="service-title">Facebook</div></div>
+        </div>
+        
+        <div class="section-title">⚠️ Demo Notice</div>
+        <div class="notice-box">
+            এটি একটি ডেমো ওয়েবসাইট! এখানে কোনো প্রকৃত লেনদেন সফল হবে না এবং টেস্ট সাবমিশনের পর ডেটা সাময়িকভাবে প্রদর্শিত হবে।
+        </div>
+    </div>
+    
+    <div class="bottom-nav">
+        <a href="#" class="nav-item active"><span class="nav-icon">🏠</span>Home</a>
+        <a href="#" class="nav-item"><div class="nav-center">+</div></a>
+        <a href="#" class="nav-item"><span class="nav-icon">👤</span>My Account</a>
+    </div>
 
-<div class="card"><h2>⚠️ Demo Notice</h2>
-<p class="note">এটি একটি ডেমো ওয়েবসাইট। বাস্তব টাকা নেওয়া, অটো পেমেন্ট এবং আসল Free Fire ডায়মন্ড পাঠানোর জন্য অনুমোদিত payment gateway ও বৈধ top-up supplier/API প্রয়োজন।</p></div>
-</div>
-<script>
-function order(price){
- const uid=document.getElementById('uid').value.trim();
- const pay=document.getElementById('pay').value;
- if(!uid){alert('আগে Player UID দিন।');return;}
- alert('Order demo: '+price+' টাকা | UID: '+uid+' | Payment: '+pay);
-}
-</script>
-</body></html>
+    <!-- Payment Modal Popup -->
+    <div id="payment-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-title" id="modal-title">Payment Gateway</div>
+            <div class="payment-instructions" id="payment-instructions">
+                নির্দেশনা লোড হচ্ছে...
+            </div>
+            <label class="input-label" style="text-align: left;">Transaction ID (TxID) লিখুন</label>
+            <input type="text" id="txid-input" class="input-box" placeholder="e.g. 8MNB76TR5E" style="margin-bottom: 15px;">
+            <button class="modal-btn submit-btn" onclick="confirmPayment()">পেমেন্ট নিশ্চিত করুন</button>
+            <button class="modal-btn close-btn" onclick="closeModal()">বাতিল করুন</button>
+        </div>
+    </div>
+
+    <script>
+        let selectedPackageInfo = null;
+
+        function selectPackage(element, name, price) {
+            // Remove selection from all cards
+            document.querySelectorAll('.package-card').forEach(card => {
+                card.classList.remove('selected');
+                card.querySelector('.order-btn').innerText = 'Select';
+            });
+            // Add selection to clicked card
+            element.classList.add('selected');
+            element.querySelector('.order-btn').innerText = 'Selected';
+            selectedPackageInfo = { name: name, price: price };
+        }
+
+        function processOrder() {
+            const uid = document.getElementById('player-uid').value;
+            const method = document.getElementById('payment-method').value;
+
+            if (!uid) {
+                alert('অনুগ্রহ করে আপনার Free Fire Player UID লিখুন!');
+                return;
+            }
+            if (!selectedPackageInfo) {
+                alert('অনুগ্রহ করে একটি ডায়মন্ড প্যাকেজ সিলেক্ট করুন!');
+                return;
+            }
+
+            // Setup Modal Content Dynamically
+            document.getElementById('modal-title').innerText = method + ' Payment Gateway';
+            document.getElementById('payment-instructions').innerHTML = `
+                <strong>ধাপ ১:</strong> আমাদের ওয়ান-টাইম পার্সোনাল ${method} নম্বরে <strong>৳${selectedPackageInfo.price}</strong> সেন্ড মানি করুন।<br>
+                <strong>ধাপ ২:</strong> নিচে আপনার পেমেন্ট ট্রানজেকশন আইডি (TxID) বসিয়ে সাবমিট করুন।<br><br>
+                <span style="color:#eab308;">⚠️ ডেমো পারপাস: যেকোনো ডামি আইডি বসিয়ে টেস্ট করতে পারেন।</span>
+            `;
+            
+            document.getElementById('payment-modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('payment-modal').style.display = 'none';
+        }
+
+        function confirmPayment() {
+            const txid = document.getElementById('txid-input').value;
+            if (!txid) {
+                alert('অনুগ্রহ করে ট্রানজেকশন আইডি (TxID) লিখুন!');
+                return;
+            }
+            alert('ধন্যবাদ! আপনার টপ-আপ অর্ডারটি সফলভাবে গ্রহণ করা হয়েছে। ডেমো ট্রানজেকশন আইডি: ' + txid);
+            closeModal();
+            // Reset input values
+            document.getElementById('player-uid').value = '';
+            document.getElementById('txid-input').value = '';
+            document.querySelectorAll('.package-card').forEach(card => {
+                card.classList.remove('selected');
+                card.querySelector('.order-btn').innerText = 'Select';
+            });
+            selectedPackageInfo = null;
+        }
+    </script>
+</body>
+</html>
